@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     slugify = {
-      source = "public-cloud-wl/slugify"
+      source  = "public-cloud-wl/slugify"
       version = "0.1.0"
     }
   }
