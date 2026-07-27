@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 // Ensure SlugifyProvider satisfies various provider interfaces.
@@ -26,13 +25,8 @@ type SlugifyProvider struct {
 	version string
 }
 
-// SlugifyProviderModel describes the provider data model.
-type SlugifyProviderModel struct {
-	Endpoint types.String `tfsdk:"endpoint"`
-}
-
 func (p *SlugifyProvider) Metadata(ctx context.Context, req provider.MetadataRequest, resp *provider.MetadataResponse) {
-	resp.TypeName = "scaffolding"
+	resp.TypeName = "slugify"
 	resp.Version = p.version
 }
 
@@ -43,13 +37,6 @@ func (p *SlugifyProvider) Schema(ctx context.Context, req provider.SchemaRequest
 }
 
 func (p *SlugifyProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
-	var data SlugifyProviderModel
-
-	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
-
-	if resp.Diagnostics.HasError() {
-		return
-	}
 }
 
 func (p *SlugifyProvider) Resources(ctx context.Context) []func() resource.Resource {
